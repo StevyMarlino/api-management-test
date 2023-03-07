@@ -7,12 +7,19 @@ use App\Http\Requests\IncomeRequest;
 use App\Services\Operations\ExpenseService;
 use App\Services\Operations\IncomeService;
 use App\Services\Operations\ListService;
+use App\Services\Users\UserListService;
 
 class OperationController extends Controller
 {
-    public function getListTransaction()
+    public function listUsers()
     {
-        
+        try {
+           $list = (new UserListService)->list();
+        } catch(\Exception $e) {
+            return response()->error([], $e->getMessage(), 401);
+        }
+
+        return response()->success($list,'all User List', 201);
     }
 
     public function addIncome(IncomeRequest $request)

@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth:sanctum','role:admin,user']], function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum','role:admin']], function () {
+    Route::get('listUsers',[OperationController::class,'listUsers']);
     Route::prefix('operation')->group(function () {
         Route::get('listAllOperations',[OperationController::class,'allOperation']);
     });
