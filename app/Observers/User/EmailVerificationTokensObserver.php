@@ -7,7 +7,7 @@ use App\Models\EmailVerificationTokens;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
-class EmailverificationObserver
+class EmailVerificationTokensObserver
 {
     /**
      * Handle the EmailVerificationTokens "created" event.

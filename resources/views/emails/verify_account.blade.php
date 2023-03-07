@@ -45,7 +45,7 @@
                 <tr>
                     <td style="border-top:1px solid #f6f6f6; padding-top:20px; color:#777">If the button above does not
                         work, try copying and pasting the URL into your browser. If you continue to have problems,
-                        please feel free to contact us at info@myhemle.org
+                        please feel free to contact us at info@manage.org
                     </td>
                 </tr>
                 </tbody>
@@ -53,7 +53,7 @@
         </div>
         <div style="text-align: center; font-size: 12px; color: #b2b2b5; margin-top: 20px">
             <p> Powered by management systeme <br>
-                <a href="https://wemodevsolutions.org/"
+                <a href="#"
                    style="color: #b2b2b5; text-decoration: underline;">Unsubscribe</a></p>
         </div>
     </div>

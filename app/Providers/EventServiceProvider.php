@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Models\EmailVerificationTokens;
-use App\Observers\User\EmailverificationObserver;
+use App\Observers\User\EmailVerificationTokensObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -29,6 +29,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        EmailVerificationTokens::observe(EmailverificationObserver::class);
+        EmailVerificationTokens::observe(EmailVerificationTokensObserver::class);
     }
 }
