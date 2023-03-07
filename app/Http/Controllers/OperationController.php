@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\activeOrDesactiveRequest;
 use App\Http\Requests\ExpenseRequest;
 use App\Http\Requests\IncomeRequest;
+use App\Http\Requests\storeCategoryRequest;
+use App\Services\Operations\CategoryService;
 use App\Services\Operations\ExpenseService;
 use App\Services\Operations\IncomeService;
 use App\Services\Operations\ListService;
@@ -83,5 +85,23 @@ class OperationController extends Controller
           }
   
           return response()->success($data, 'User successfully activated', 200);
+    }
+
+    public function listCategory()
+    {
+        try {
+          $data =  (new CategoryService)->List();
+        } catch(\Exception $e) {
+            return response()->error([], $e->getMessage(), 401);
+        }
+
+        return response()->success($data, 'List Category Operation', 200);
+    }
+
+    public function addCategory(storeCategoryRequest $request)
+    {
+        (new CategoryService)->add($request);
+
+        return response()->success([],'New Category added', 201);
     }
 }
