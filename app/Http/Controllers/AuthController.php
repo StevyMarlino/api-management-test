@@ -24,12 +24,14 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        if (!$this->InvalidCredential($request)) {
-            return response()->error([], 'Invalid credentials', 400);
-        }
-        if (!$this->emailVerification()) {
-            return response()->error([], 'You need to verify your account, check your email', 401);
-        }
+        // Verification des crédentiel
+        if (!$this->InvalidCredential($request))  return response()->error([], 'Invalid credentials', 400);
+
+        // Verification de la vérificaiton du mail
+        if (!$this->emailVerification()) return response()->error([], 'You need to verify your account, check your email', 401);
+
+        // Verification si le compte est activé.
+        if(!$this->accountIsActivate()) return response()->error([], 'Your account is Desactivaterd contact the Admin', 401);
 
         $user = Auth::user();
 
@@ -50,6 +52,11 @@ class AuthController extends Controller
     private function emailVerification()
     {
         return Auth::user()->email_verified_at;
+    }
+
+    private function accountIsActivate()
+    {
+        return Auth::user()->is_active;
     }
 
     /**

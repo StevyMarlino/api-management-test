@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OperationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,4 +21,18 @@ Route::middleware('guest')->group(function () {
 
     // Verification User route
     Route::get('/user/verify/{token}', [AuthController::class, 'verifyUser'])->name('token.verify');
+});
+
+Route::group(['middleware' => ['auth:sanctum','role:admin,user']], function () {
+    Route::prefix('operation')->group(function () {
+        Route::post('addIncome',[OperationController::class,'addIncome']);
+        Route::post('addExpense',[OperationController::class,'addExpense']);
+        Route::get('listMyOperations',[OperationController::class,'myOperations']);
+    });
+});
+
+Route::group(['middleware' => ['auth:sanctum','role:admin']], function () {
+    Route::prefix('operation')->group(function () {
+        Route::get('listAllOperations',[OperationController::class,'allOperation']);
+    });
 });

@@ -21,7 +21,6 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name',
         'last_name',
-        'phone',
         'email',
         'password',
     ];
@@ -50,8 +49,13 @@ class User extends Authenticatable
         return $this->hasOne(EmailVerificationTokens::class);
     }
 
-    public function operations()
+    public function imcome()
     {
-        return $this->hasMany(Operation::class);
+        return $this->hasMany(Imcome::class);
+    }
+
+    public function expense()
+    {
+        return $this->hasMany(Expense::class);
     }
 }

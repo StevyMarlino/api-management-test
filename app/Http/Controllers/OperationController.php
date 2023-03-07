@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ExpenseRequest;
+use App\Http\Requests\IncomeRequest;
+use App\Services\Operations\ExpenseService;
+use App\Services\Operations\IncomeService;
+use App\Services\Operations\ListService;
 
 class OperationController extends Controller
 {
@@ -11,13 +15,43 @@ class OperationController extends Controller
         
     }
 
-    public function addIncome()
+    public function addIncome(IncomeRequest $request)
     {
+        try {
+            (new IncomeService)->save($request);
+        } catch(\Exception $e) {
+            return response()->error([], $e->getMessage(), 401);
+        }
 
+        return response()->success([],'New Income added', 201);
     }
 
-    public function addExpense()
+    public function addExpense(ExpenseRequest $request)
     {
+        (new ExpenseService)->save($request);
 
+        return response()->success([],'New Expense added', 201);
+    }
+
+    public function myOperations()
+    {
+        try {
+          $data =  (new ListService)->myList();
+        } catch(\Exception $e) {
+            return response()->error([], $e->getMessage(), 401);
+        }
+
+        return response()->success($data, 'My Last 3 Mooth Operation', 200);
+    }
+
+    public function allOperation()
+    {
+        try {
+          $data =  (new ListService)->myList();
+        } catch(\Exception $e) {
+            return response()->error([], $e->getMessage(), 401);
+        }
+
+        return response()->success($data, 'My Last 3 Mooth Operation', 200);
     }
 }
