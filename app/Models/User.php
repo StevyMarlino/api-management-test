@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(EmailVerificationTokens::class);
     }
+
+    public function operations()
+    {
+        return $this->hasMany(Operation::class);
+    }
 }

@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Models\EmailVerificationTokens;
-use App\Observers\User\EmailVerificationTokensObserver;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Schema;
@@ -44,8 +43,7 @@ class AppServiceProvider extends ServiceProvider
             ], $status_code);
         });
 
-        //EmailVerificationTokens::observe(EmailVerificationTokensObserver::class);
-
+    
         if (App::environment('production'))
         {
             Schema::defaultStringLength(191);

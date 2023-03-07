@@ -18,6 +18,7 @@ class CreateOperationsTable extends Migration
             $table->unsignedBigInteger('income')->nullable();
             $table->unsignedBigInteger('expense')->nullable();
             $table->foreignId('budget_id')->references('id')->on('budgets')->nullable();
+            $table->foreignId('user_id')->references('id')->on('users')->nullable();
             $table->timestamps();
         });
     }
