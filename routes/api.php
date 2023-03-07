@@ -23,6 +23,8 @@ Route::middleware('guest')->group(function () {
     Route::get('/user/verify/{token}', [AuthController::class, 'verifyUser'])->name('token.verify');
 });
 
+
+// route User and Admin
 Route::group(['middleware' => ['auth:sanctum','role:admin,user']], function () {
     Route::prefix('operation')->group(function () {
         Route::post('addIncome',[OperationController::class,'addIncome']);
@@ -31,9 +33,14 @@ Route::group(['middleware' => ['auth:sanctum','role:admin,user']], function () {
     });
 });
 
+
+// Route Admin
 Route::group(['middleware' => ['auth:sanctum','role:admin']], function () {
+    
     Route::get('listUsers',[OperationController::class,'listUsers']);
+    Route::post('activeOrDesactive',[OperationController::class,'activeOrDesactive']);
     Route::get('listUsersOperations/{user_id}',[OperationController::class,'listUsersOperations']);
+
     Route::prefix('operation')->group(function () {
         Route::get('listAllOperations',[OperationController::class,'allOperation']);
     });

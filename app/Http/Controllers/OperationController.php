@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\activeOrDesactiveRequest;
 use App\Http\Requests\ExpenseRequest;
 use App\Http\Requests\IncomeRequest;
 use App\Services\Operations\ExpenseService;
@@ -71,5 +72,16 @@ class OperationController extends Controller
         }
 
         return response()->success($data, 'My Last 3 Mooth Operation', 200);
+    }
+
+    public function activeOrDesactive(activeOrDesactiveRequest $request)
+    {
+        try {
+            $data =  (new UserListService)->activeOrDesactive($request);
+          } catch(\Exception $e) {
+              return response()->error([], $e->getMessage(), 401);
+          }
+  
+          return response()->success($data, 'User successfully activated', 200);
     }
 }

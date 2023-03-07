@@ -10,4 +10,15 @@ class UserListService
     {
         return User::all();
     }
+
+    public function activeOrDesactive($data)
+    {
+        $user = User::findOrfail($data->user_id);
+
+        $user->is_active = $data->action;
+
+        $user->save();
+
+        return $user;
+    }
 }
