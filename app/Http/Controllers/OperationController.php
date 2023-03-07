@@ -22,6 +22,17 @@ class OperationController extends Controller
         return response()->success($list,'all User List', 201);
     }
 
+    public function listUsersOperations($userId)
+    {
+        try {
+            $list = (new ListService)->allUserOperation($userId);
+         } catch(\Exception $e) {
+             return response()->error([], $e->getMessage(), 401);
+         }
+ 
+         return response()->success($list,'all Operations', 201);
+    }
+
     public function addIncome(IncomeRequest $request)
     {
         try {

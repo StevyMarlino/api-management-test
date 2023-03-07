@@ -37,4 +37,17 @@ class ListService
 
         return $data;
     }
+
+    public function allUserOperation($userId)
+    {
+        $incomes = Income::where('user_id', $userId)->get();
+        $expenses = Expense::where('user_id', $userId)->get();
+
+        $data = [
+            'incomes' => $incomes,
+            'expenses' =>  $expenses
+        ];
+
+        return $data;
+    }
 }
